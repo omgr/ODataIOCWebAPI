@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using NLog;
 
 namespace ODataIOCWebAPI.IOC.Repositories
 {
     public class ProductsRepository :IProductsRepository
     {
+        private Logger logger = LogManager.GetCurrentClassLogger();
         private DBContext db = new DBContext();
 
         public bool ProductExists(int key)
@@ -17,6 +19,7 @@ namespace ODataIOCWebAPI.IOC.Repositories
         }
 
         public IQueryable<Product> GetAll() {
+            logger.Debug("Getting all products called from Productsrepositor");
             return db.Products;
         }
 
